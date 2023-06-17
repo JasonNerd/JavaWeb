@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day2-chapter01-Vue快速入门</title>
+    <!-- 引入 vue.js 文件 -->
+    <script src="../static/js/vue.js"></script>
+    <style>
+        div{
+            font-size: 16px;
+            line-height: 32px;
+        }
+        body{
+            width: 80%;
+            margin: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div id="vmodel">
+        <h2>1. v-model</h2>
+        v-model 在表单元素上创建双向数据绑定双向数据绑定, 在视图页面修改输入框文本等价于修改了 message 对象, 因而后面的插值语句也跟着改变
+        <br>
+        <input type="text" name="hello" V-model="message"> {{message}}
+    </div>
+    <br><br>
+    <div id="vbind">
+        <h2>2. v-bind</h2>
+            v-bind: 为HTML标签绑定属性值, 如设置href, css样式等
+            修改输入框的url可以改变链接指向的url
+        <br>
+        <a :href="url" target="_blank">bilibili 无限矿业公司</a>
+        <br>
+        <input type="text" V-model="url">
+    </div>
+    <br><br>
+    <div id="von">
+        <h2>3. v-on</h2>
+        v-on 为HTML标签绑定事件
+        例如为按钮绑定点击事件: v-on:click="handle()"
+        <br>
+        <input type="button" value="click me!" @click="handle()">
+    </div>
+    <br><br>
+    <div id="vif">
+        <h2>4. v-if / V-else-if / v-else / v-show</h2>
+        分别使用 if-else-if 和 show 完成以下逻辑:在输入框输入一个代表年龄的正整数, 判断并显示年龄阶段, 例如 不超过35: 青年人, 小于60: 中年人, 其他老年人;
+        <br>a. 使用 v-if, v-else-if, v-else: 只渲染一个元素<br>
+        <input type="text" V-model="age">
+        经判定，属于<span v-if="age <= 35">青年</span>
+        <span v-else-if="age<60">中年</span>
+        <span v-else>老年</span>
+
+        <br>b. 使用 v-show: 都渲染, 但通过 hidden 将指定元素隐藏<br>
+        <input type="text" V-model="age2">
+        经判定，属于<span v-show="age2 <= 35">青年</span>
+        <span v-show="35<age2 && age2<60">中年</span>
+        <span v-show="age2>=60">老年</span>
+        <br>v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+
+        相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+        
+        一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+    </div>
+
+    <div id="vexample">
+        <h2>3. 案例 v-for</h2>
+        通过Vue完成表格数据的渲染展示, 基于源数据多次渲染元素或模板块。v-for指令之值，必须使用特定语法 alias in expression，为当前遍历的元素提供别名.
+        <br>
+        <code>
+            var users = [
+                {name:"Tom", age: 20, gender: 1, score: 78},
+                {name:"Rose", age: 18, gender: 2, score: 86},
+                {name: "Jerry", age: 26, gender: 1, score: 90},
+                {name: "Tony", age: 30, gender: 1, score: 52}
+            ]
+        </code>
+        <br>
+        <table border="1" cellspacing="0" width="60%">
+            <tr>
+                <th>姓名</th><th>性别</th><th>年龄</th><th>成绩</th><th>评级</th>
+            </tr>
+            <tr v-for="u in users" align="center">
+                <td>{{u.name}}</td>
+                <td><span v-if="u.gender == 1">男</span><span v-else>女</span></td>
+                <td><span>{{u.age}}</span></td>
+                <td><span>{{u.score}}</span></td>
+                <td>
+                    <span v-if="u.score>=85">优秀</span>
+                    <span v-else-if="u.score>60">及格</span>
+                    <span style="color:red" v-else>不及格</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h2>生命周期</h2>
+        生命周期:指一个对象从创建到销毁的整个过程. 生命周期的八个阶段:每触发一个生命周期事件，会自动执行一个生命周期方法(钩子)。
+        <br>
+        <code>
+            mounted(): function(){<br>
+                console.log("Vue挂载完毕,发送请求获取数据");<br>
+            }<br>
+        </code>
+        
+    </div>
+</body>
+<script>
+    // 在JS代码区域，创建Vue核心对象，定义数据模型
+    new Vue({
+        el: "#vmodel",     // 绑定视图
+        data: {
+            message: "Hello Vue!"   // 数据模型
+        }
+    });
+
+    new Vue({
+        el: "#vbind",
+        data: {
+            url: "https://bilibili.com"
+        }
+    });
+
+    new Vue({
+        el: "#von",
+        data: {
+            // ...
+        },
+        methods:{
+            handle(){
+                alert("点击事件！")
+            }
+        }
+    });
+    
+    new Vue({
+        el: "#vif",
+        data: {
+            age: "20",
+            age2: "45"
+        }
+    });
+
+    new Vue({
+        el: "#vexample",
+        data: {
+            users: [
+                {name:"Tom", age: 20, gender: 1, score: 78},
+                {name:"Rose", age: 18, gender: 2, score: 86},
+                {name: "Jerry", age: 26, gender: 1, score: 90},
+                {name: "Tony", age: 30, gender: 1, score: 52}
+            ],
+        }
+    });
+    var user = {name:"Rose", age: 18, gender: 2, score: 86};
+    console.log(JSON.stringify(user))
+</script>
+</html>

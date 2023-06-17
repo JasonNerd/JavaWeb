@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js 事件监听与 DOM 操作</title>
+    <style>
+        img{
+            width: 20%;
+        }
+        div{
+            width: 80%;
+            margin: 2%;
+        }
+        .btn{
+            background-color: antiquewhite;
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img id="light" src="https://pic.quanjing.com/9j/rb/QJ6863673268.jpg">
+        <br>
+        <input type="button" value="点亮" id="on" class="btn">
+        <input type="button" value="熄灭" id="off" class="btn">
+    </div>
+    <br>
+    <div>
+        <input id="txtframe" type="text" value="itcast" onfocus="upper()" onblur="lower()">
+    </div>
+    <br>
+    <div>
+        <input type="checkbox" name="sport">篮球
+        <input type="checkbox" name="sport">网球
+        <input type="checkbox" name="sport">足球
+        <input type="checkbox" name="sport">排球
+        <input type="checkbox" name="sport">冰壶
+        <div class="ctrls">
+            <input type="button" value="全选" onclick="checkAll()">
+            <input type="button" value="反选" onclick="checkRev()">
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("on").onclick = function(){
+        document.getElementsByTagName("img")[0].src = "https://pic.quanjing.com/9j/rb/QJ6863673268.jpg"
+    }
+    document.getElementById("off").onclick = function(){
+        document.getElementsByTagName("img")[0].src = "https://pic.quanjing.com/sc/t5/QJ8197528800.jpg"
+    }
+    function upper(){
+        var txtframe = document.getElementById("txtframe")
+        txtframe.value = txtframe.value.toUpperCase();
+    }
+    function lower(){
+        var txtframe = document.getElementById("txtframe")
+        txtframe.value = txtframe.value.toLowerCase();
+    }
+    function checkAll(){
+        var cks = document.getElementsByName("sport")
+        for (let i = 0; i < cks.length; i++) {
+            const element = cks[i];
+            element.checked = true;
+        }
+    }
+    function checkRev(){
+        var cks = document.getElementsByName("sport")
+        for (let i = 0; i < cks.length; i++) {
+            const element = cks[i];
+            element.checked = !element.checked;
+        }
+    }
+</script>
+</html>

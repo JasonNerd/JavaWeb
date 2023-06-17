@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <title>Hello JavaScript</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 1. var 全局变量, 弱类型, 有多种类型, 例如Number Boolean等
+    // let 为代码块局部变量, const 为常量关键字
+    var a = 20;
+    console.log(a);
+    a = "张三";     // that's ok
+    console.log(a);
+    a = Number(a);
+    console.log(typeof(a)); // number
+    console.log(a);   // NaN
+    console.log(Boolean(a));    // False
+    console.log("==============================\n\n");
+    // 2. Array 数组
+    var arr = ["20", "hello", 5, 18, {"name":a, "MP3":"女骑士"}];
+    for (let i = 0; i < arr.length; i++) {      // for - i
+        const element = arr[i];
+        console.log(element);
+    }
+    arr.forEach(element => {    // for-each 简化语法
+        console.log(element);
+    });
+    console.log("==============================\n\n");
+    // 3. String
+    var str = "Hello String"; // 也可使用单引号
+    document.write('<hr>'+str+'<br>')
+    document.write("charAt(2): "+str.charAt(2)+'<br>')
+    document.write("charAt(20): "+str.charAt(20)+'<br>')
+    document.write("indexof(i): "+str.indexOf('i')+'<br>')
+    document.write("indexof(k): "+str.indexOf('k')+'<br>')
+    document.write("substring(1, 4): "+str.substring(1, 4)+'<br>')
+    document.write("substring(5, 20): "+str.substring(5, 20)+'<hr><br><hr>')
+    console.log("==============================\n\n");
+    // 4. 自定义对象: json, JSON.parse(userstr), JSON.stringify(jsobject)
+    var user = {
+        "name": "Jasonic",
+        "age": 28,
+        "gender": "female",
+        "eat": function(){
+            console.log("eat something.")
+        }
+    }
+    console.log(user.name)
+    console.log(user.age)
+    console.log(user.gender)
+    user.eat()
+    console.log(user)
+    var userStr = JSON.stringify(user)
+    document.write(userStr+'<br>')
+    var user = JSON.parse(userStr)
+    document.writeln(user)
+
+    // 4. BOM:Browser Object Model 浏览器对象模型
+    var id = 10010;
+    function f1() {
+        ++id;
+        console.log(id);
+    };
+    setInterval(f1, 1500);  // 注意这里是以 ms 为单位
+    var flg = confirm("是不是要吃饭了?")
+    if(flg){
+        setTimeout(function f(){
+            window.location.href = "https://www.github.com";
+        }, 2000)
+    }
+
+    // 5. Document Obiect Model，文档对象模型, 将标记语言的各个组成部分封装为对应的对象
+    // JavaScript 通过DOM，就能够对HTML进行操作
+    // 改变HTML元素的内容
+    // 改变HTML元素的样式(CSS)
+    // 对HTMLDOM 事件作出反应
+    // 添加和删除 HTML元素
+
+    // 6. js事件监听
+    
+
+</script>
+</html>

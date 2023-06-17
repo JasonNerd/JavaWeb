@@ -1,2 +1,23 @@
 # JavaWeb
-JavaLearning\HeiMa\WebbingTechniques\S02BackEnd\Day04Maven
+学习 JavaWeb 开发的基础知识, 主要参考的是b站黑马程序员的【2023 Java学习路线】
+链接：https://www.bilibili.com/read/cv9965357
+## 指导
+1. 跟随课程
+https://www.bilibili.com/video/BV1m84y1w7Tb
+
+2. 学习理念
+   不要求面面俱到的做好每一课的笔记，只需要记录关键知识点，基于知识点完成能跑的项目，记录项目中的问题和解决方案。
+   
+## 文件夹说明
+|名称|说明|
+|:-|:-|
+course|简要的课程笔记，包含着关键知识点|
+project|以关键知识点作为核心的可运行项目，每一个项目都应说明运行方法
+reports|报告或者日志，记录项目中的问题和解决方案
+data|数据，可能的数据文件，例如作为输入、中间缓存或结果输出的文件
+reference|任何参考的代码或者文档
+
+## 知识点提要
+### 1. Web前端
+#### 1-1. 
+
