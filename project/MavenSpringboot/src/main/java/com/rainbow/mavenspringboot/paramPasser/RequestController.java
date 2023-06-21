@@ -12,9 +12,9 @@ import java.util.List;
 
 @SpringBootApplication
 @RestController
-public class ParamPass {
+public class RequestController {
     public static void main(String[] args) {
-        SpringApplication.run(ParamPass.class, args);
+        SpringApplication.run(RequestController.class, args);
     }
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
