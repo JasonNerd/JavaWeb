@@ -1,0 +1,30 @@
+
+--
+insert into tb_emp values (null, 'machao', '马超', 1, null, 2, '2023-05-28', now(), now());
+insert into tb_emp values (null, 'xuzhu', '许诸', 1, null, 3, '2022-01-28', now(), now());
+insert into tb_emp values (null, 'liang', '张良', 1, null, 4, '2023-05-26', now(), now());
+insert into tb_emp values (null, 'fei', '张飞', 1, null, 1, '2011-10-28', now(), now());
+insert into tb_emp values (null, 'bei', '刘备', 1, null, 1, '2010-05-26', now(), now());
+insert into tb_emp values (null, 'sun', '孙权', 1, null, 3, '2011-10-20', now(), now());
+insert into tb_emp values (null, 'zhou', '周瑜', 1, null, 2, '2018-03-18', now(), now());
+insert into tb_emp values (null, 'guan', '关羽', 1, null, 2, '2013-04-28', now(), now());
+insert into tb_emp values (null, 'sima', '司马懿', 1, null, 4, '2020-08-28', now(), now());
+insert into tb_emp values (null, 'cao', '曹操', 1, null, 2, '2012-04-28', now(), now());
+insert into tb_emp values (null, 'zhong', '黄忠', 1, null, 3, '2020-09-28', now(), now());
+insert into tb_emp values (null, 'su', '马谡', 1, null, 2, '2018-05-28', now(), now());
+insert into tb_emp values (null, 'kong', '诸葛亮', 1, null, 4, '2013-07-01', now(), now());
+insert into tb_emp values (null, 'xqao', '小乔', 2, null, 2, '2003-09-17', now(), now());
+insert into tb_emp values (null, 'dqao', '大乔', 2, null, 3, '2005-12-13', now(), now());
+insert into tb_emp values (null, 'sce', '孙策', 1, null, 2, '2023-05-28', now(), now());
+insert into tb_emp values (null, 'hml', '花木兰', 2, null, 1, '2023-05-28', now(), now());
+insert into tb_emp values (null, 'zji', '甄姬', 2, null, 2, '2023-05-21', now(), now());
+insert into tb_emp values (null, 'wzt', '武则天', 2, null, 3, '2022-01-20', now(), now());
+insert into tb_emp values (null, 'xshi', '西施', 2, null, 4, '2023-02-22', now(), now());
+insert into tb_emp values (null, 'dchan', '貂蝉', 2, null, 1, '2012-08-19', now(), now());
+insert into tb_emp values (null, 'lvbu', '吕布', 1, null, 1, '2010-05-08', now(), now());
+insert into tb_emp values (null, 'yyhuan', '杨玉环', 2, null, 3, '2017-11-12', now(), now());
+insert into tb_emp values (null, 'wzjun', '王昭君', 2, null, 2, '2015-12-22', now(), now());
+insert into tb_emp values (null, 'smaxru', '司马相如', 2, null, 2, '2008-07-20', now(), now());
+insert into tb_emp values (null, 'ldaiyu', '林黛玉', 2, null, 1, '2021-05-11', now(), now());
+insert into tb_emp values (null, 'liqzhao', '李清照', 2, null, 2, '2022-09-09', now(), now());
+insert into tb_emp values (null, 'machao', '马超', 1, null, 3, '2023-05-28', now(), now());
