@@ -124,3 +124,12 @@ select * from th_emp where (entrydate,job)=(select entrydate, job from tb_emp wh
 --7
 select e.* , d.name from (select * from tb_emp where entrydate > '2006-01-01') e , tb_dept d where e.dept id = d.id;
 ```
+
+
+## MySQL 索引
+主键索引 primary key
+唯一索引 unique
+
+## 数据结构--B+树
+每一个节点，可以存储多个key (有n个key，就有n个指针)。所有的数据都存储在叶子节点，非叶子节点仅用于索引数据。叶子节点形成了一颗双向链表，便于数据的排序及区间范围查询
+
