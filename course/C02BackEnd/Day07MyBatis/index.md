@@ -302,14 +302,69 @@ void insert(Emp emp);
 **MyBatisX**
 是一个IDEA插件, 可以为Java代码和对应的MySQL代码两个位置相互关联, 鼠标单击即可跳转, 这样定位代码十分方便。
 
-#### 2-2-5. 练习
-编写 Mapper 并进行 Test, 可以自由选择注解方式或者XML方式(或者组合)
-
-1. 考虑新增套餐的场景, 在插入套餐条目后, 还需要维护菜品与套餐的关系表, 因此需要在**插入套餐后返回其ID**;
-   ```@Options(keyProperty="id", useGeneratedKeys=true) ```
-2. 尝试更新一条数据
+#### 2-2-5. insert主键回显
+考虑新增套餐的场景, 在插入套餐条目后, 还需要维护菜品与套餐的关系表, 因此需要在**插入套餐后返回其ID**;
+```java
+@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+@Insert("insert into tb_emp(username, password, name, gender, image, job, entrydate,"+
+                        " dept_id, create_time, update_time)"+
+    "VALUES (#{username}, #{password}, #{name}, #{gender}, #{image}, #{job}, #{entrydate},"+
+            "#{deptId}, #{createTime}, #{updateTime})")
+void insert(Emp emp);
+```
+正如代码中所示, **在`@Insert`注解前添加一个`@Options`注解**, 指明要返回的字段, 那么该字段可以在插入数据的调用者实体的id显示, 注意Options只和Insert搭配, 如果将Insert的SQL语句转到XML中, 则Options失效, 将不能返回主键值.
 
 ### 2-3. 查询语句
 
 
 ## 3. 动态SQL
+### 3-1. `<if>`
+**场景1**: 在员工查询中, 我们有多个查询条件, 例如姓名、性别、入职时间, 通常会依据其中的零个、一个或者多个条件进行查询, 此时查询SQL语句就不是固定的了
+
+**解决方案: XML中使用`<if>`和`<where>`标签**
+
+**场景2**: 更新员工信息, 仅更新其中的几个关键字, 如果是静态的, 则其他未更新的字段被设置为null值, 这里需要使用`if`和`set`标签
+1. 原始的静态SQL语句:
+```xml
+<update id="update">
+    update tb_emp
+    set username=#{username}, password=#{password}, name=#{name},
+        gender=#{gender}, image=#{image}, job=#{job}, entrydate=#{entrydate},
+        dept_id=#{deptId}, update_time=#{updateTime}
+    where id=#{id}
+</update>
+```
+假如只想修改部分字段, 那么很自然的就只设置部分字段的值, 例如:
+```java
+Emp emp = new Emp();
+emp.setId(22);      // 更新 22 号数据
+emp.setUsername("Amel0");
+emp.setName("阿迈尔0");
+emp.setGender((short) 2);
+emp.setUpdateTime(LocalDateTime.now());
+empMapper.update(emp);
+```
+主要问题在于, 第一是其他字段为null值, 这将会覆盖原有值, 这些"其他字段"可能是具有非空约束的, 这样的插入执行将导致异常
+因此, 使用动态SQL语句如下:
+```xml
+<update id="update">
+    update tb_emp
+    <set>
+        <if test="username !=null">username=#{username},</if>
+        <if test="name !=null">name=#{name},</if>
+        <if test="gender !=null">gender=#{gender},</if>
+        <if test="image !=null">image=#{image},</if>
+        <if test="job !=null">job=#{job},</if>
+        <if test="entrydate !=null">entrydate=#{entrydate},</if>
+        <if test="deptId !=null">dept_id=#{deptId},</if>
+        <if test="updateTime !=null">update_time=#{updateTime}</if>
+    </set>
+    where id=#{id}
+</update>
+```
+**注意: 1. 不要写错字段名; 2.注意表字段和实体字段的命名对应关系; 3.不要忘了写逗号 4. 一定一定不要写错了字段名！！！**
+
+
+注意拼接时候可能出现SQL语法错误, 需要仔细检查.
+### 3-2. ``
+
