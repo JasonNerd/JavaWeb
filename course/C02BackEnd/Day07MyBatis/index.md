@@ -316,6 +316,36 @@ void insert(Emp emp);
 
 ### 2-3. 查询语句
 
+**通过 id 查找**
+```Java
+// EmpMapper
+@Select("select id, username, password, name, gender, image, job, " +
+            "entrydate, dept_id, create_time, update_time " +
+            "from tb_emp where id=#{id}")
+Emp getByID(Integer id);
+// Test
+public void testSelect(){
+    System.out.println(empMapper.getByID(10));
+}
+```
+可以看到, 结果查询到了, 并且 deptId, createTime 等字段也不为空, 这就说明 properties 文件的驼峰开启有效(仅在Select注解里).
+
+**条件查询**, 姓名模糊查询/性别/入职时间, 这三个条件都是可选的, 因此使用动态SQL
+```xml
+<select id="select" resultType="com.rainbow.pojo.Emp">
+    select id, username, password, name, gender, image, job, entrydate,
+            dept_id, create_time, update_time from tb_emp
+    <where>
+        <if test="name != null">name like concat('%', #{name}, '%') and </if>
+        <if test="gender != null">gender = #{gender} and </if>
+        <if test="entrydate != null">entrydate between #{begin} and #{end}</if>
+        order by update_time desc
+    </where>
+</select>
+```
+有两个需要特别注意的点, 一是`concat('%', #{name}, '%')`, 利用了concat函数将字符串拼接起来, 但同时保留了预编译的特性, 其次注意between和and关键字的使用, 不要使用\<\>等符号(在xml中算特殊字符), 有一个解决方法是:
+使用`<![CDATA[]]>`，因为CDATA 部分中的所有内容都会被解析器忽略，所以建议使用`<![CDATA[]]>`, 例如:
+`<![CDATA[ and create_time <= #{createTime} ]]>`
 
 ## 3. 动态SQL
 ### 3-1. `<if>`

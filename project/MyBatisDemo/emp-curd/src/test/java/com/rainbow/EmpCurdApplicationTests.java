@@ -44,4 +44,18 @@ class EmpCurdApplicationTests {
         emp.setUpdateTime(LocalDateTime.now());
         empMapper.update(emp);
     }
+
+    @Test
+    public void testSelect(){
+        // 1. 通过 id 查找
+//        System.out.println(empMapper.getByID(10));
+        // 可以看到, 结果查询到了, 并且 deptId, createTime 等字段也不为空
+        // 这就说明 properties 文件的驼峰开启有效(仅在Select注解里)
+
+        // 2. 条件查询
+        System.out.println(empMapper.select(null, (short) 1,
+                LocalDate.of(2009, 10, 3),
+                LocalDate.of(2019, 5, 20))
+        );
+    }
 }

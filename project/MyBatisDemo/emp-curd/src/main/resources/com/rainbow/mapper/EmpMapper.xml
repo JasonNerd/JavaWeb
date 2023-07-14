@@ -18,4 +18,14 @@
         </set>
         where id=#{id}
     </update>
+    <select id="select" resultType="com.rainbow.pojo.Emp">
+        select id, username, password, name, gender, image, job, entrydate,
+               dept_id, create_time, update_time from tb_emp
+        <where>
+            <if test="name != null">name like concat('%', #{name}, '%') and </if>
+            <if test="gender != null">gender = #{gender} and </if>
+            <if test="begin != null and end != null">entrydate between #{begin} and #{end}</if>
+            order by update_time desc
+        </where>
+    </select>
 </mapper>
