@@ -1,5 +1,5 @@
 ---
-title: "面向切面编程(一)--AOP概述"
+title: "面向切面编程--AOP概述"
 date: 2023-10-13T15:30:10+08: 00
 draft: false
 tags: ["AOP"]
