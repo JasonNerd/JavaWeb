@@ -1,5 +1,5 @@
 ---
-title: "SpringBoot 基本原理(一) -- "
+title: "SpringBoot 基本原理--依赖传递与自动配置"
 date: 2023-10-17T15:09:53+08: 00
 draft: false
 tags: ["SpringBoot"]
