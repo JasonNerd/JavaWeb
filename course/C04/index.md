@@ -556,6 +556,6 @@ class AliyunOssTestApplicationTests {
 全部测试成功!
 
 ### 4.6 工程重组
-使用重建好的 starter 工程, 将原有的删除(包括两个java文件, yml的配置, pom中的依赖). 随后引入 starter 依赖, maven 刷新, 惊讶的发现其他的代码无需变动.
+使用重建好的 starter 工程, 将原有的删除(包括两个java文件,  ~~yml的配置~~, pom中的依赖). 随后引入 starter 依赖, maven 刷新, 惊讶的发现其他的代码无需变动.
 
-
+小 tips, 注意 yml 中关于 AliOSSProperties 四要素的配置, 它应该放在原来的工程, 而不是在引入的工具类中. 也即不要删除yml的配置
